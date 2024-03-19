@@ -1,4 +1,5 @@
 const User = require("../models/userAuth")
+const userData = require("../models/userData")
 const {v4 : uuidv4} = require("uuid")
 const { setUser } = require("../utilities/userAuth")
 //static controller 
@@ -11,8 +12,12 @@ async function handleSignUp(req,res) {
     res.render("signup")
 }
 
+
 async function handleHomePage(req,res) {
-    res.render("home")
+  const results = await userData.find({})
+  res.render("home", {
+    data: results
+  })
 }
 
 //backend 
@@ -33,7 +38,7 @@ async function handleRegisteredUser(req,res) {
     if(!user) return res.redirect("/login")
     const token = setUser(user)
     res.cookie("uid", token)
-    res.redirect("/")
+    return res.redirect("/")
 }
 
 

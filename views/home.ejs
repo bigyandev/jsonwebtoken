@@ -4,5 +4,12 @@
     </head>
     <body>
         <h1>home page</h1>
+        <form action="/api/data" method="post">
+            <input type="text" name="nickname" placeholder="nickname"/>
+            <button type="submit">submit</button>
+        </form>
+        <% data.forEach(e => { %>
+         <h1>NickName: <%= e.nickname %></h1>
+        <% }) %>
     </body>
 </html>
